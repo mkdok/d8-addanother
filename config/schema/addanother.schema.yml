@@ -1,0 +1,42 @@
+# Schema for the configuration files of the addanother module.
+
+addanother.settings:
+  type: config_object
+  label: 'Node settings'
+  mapping:
+    default_button:
+      type: boolean
+      label: 'Use admin theme when editing or creating content'
+    default_message:
+      type: boolean
+      label: 'Use admin theme when editing or creating content'
+    default_tab:
+      type: boolean
+      label: 'Use admin theme when editing or creating content'
+    default_tab_edit:
+      type: boolean
+      label: 'Use admin theme when editing or creating content'
+    button:
+      type: sequence
+      label: ''
+      sequence:
+        type: boolean
+        label: ''
+    message:
+      type: sequence
+      label: ''
+      sequence:
+        type: boolean
+        label: ''
+    tab:
+      type: sequence
+      label: ''
+      sequence:
+        type: boolean
+        label: ''
+    tab_edit:
+      type: sequence
+      label: ''
+      sequence:
+        type: boolean
+        label: ''

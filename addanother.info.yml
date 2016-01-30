@@ -1,0 +1,6 @@
+name: Add another
+description: 'Presents users with an option to create another node of the same type after a node is added.'
+package: User interface
+core: 8.x
+type: module
+configure: addanother.admin_config
