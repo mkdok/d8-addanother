@@ -11,7 +11,7 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Configure add another settings for this site.
+ * Configure Add another settings for this site.
  */
 class AddAnotherSettingsForm extends ConfigFormBase {
 

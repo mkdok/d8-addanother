@@ -1,4 +1,3 @@
-# Configure add another.
 addanother.admin_config:
   path: 'admin/structure/types/addanother'
   defaults:

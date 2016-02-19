@@ -6,9 +6,7 @@
  * node is added.
  */
 
-use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Core\Form\FormStateInterface;
-Use Drupal\Core\Link;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
@@ -49,18 +47,21 @@ function addanother_form_node_type_form_alter(&$form, FormStateInterface &$form_
       '#default_value' => isset($button) ? $button : $config->get('default_button'),
       '#description' => t('Enable this checkbox if you want to provide a "Save and add another" button on the node add form for your users.'),
     );
+
     $form['addanother_display']['message'] = array(
       '#type' => 'checkbox',
       '#title' => t('Display the Add another message after node creation.'),
       '#default_value' => isset($message) ? $message : $config->get('default_message'),
       '#description' => t('Enable this checkbox if you want to show a "Add another..." message after creating a new node.'),
     );
+
     $form['addanother_display']['tab'] = array(
       '#type' => 'checkbox',
       '#title' => t('Display the Add another tab.'),
       '#default_value' => isset($tab) ? $tab : $config->get('default_tab'),
       '#description' => t('Enable this checkbox if you want to show a "Add another" tab on nodes of this type.'),
     );
+
     $form['addanother_display']['tab_edit'] = array(
       '#type' => 'checkbox',
       '#title' => t('Also Display Add another tab on edit page.'),
@@ -92,7 +93,7 @@ function addanother_form_node_type_form_submit(&$form, FormStateInterface $form_
  */
 function addanother_form_node_form_alter(&$form, FormStateInterface &$form_state) {
   if ($node = $form_state->getFormObject()->getEntity()) {
-    if (empty($node->Id())){
+    if (empty($node->Id())) {
       $type = $node->getType();
       $config = \Drupal::config('addanother.settings');
       $account = \Drupal::currentUser();
@@ -102,7 +103,7 @@ function addanother_form_node_form_alter(&$form, FormStateInterface &$form_state
         if ($button) {
           $form['actions']['addanother'] = array(
             '#attributes' => array(
-              'class' => array('button')
+              'class' => array('button'),
             ),
             '#type' => 'submit',
             '#value' => t('Save and add another'),
@@ -124,7 +125,6 @@ function addanother_form_node_form_alter(&$form, FormStateInterface &$form_state
 
 /**
  * Submit handler for the 'Save and add another' button.
- * This allows a redirect to be set if this was the button pressed.
  */
 function addanother_node_form_submit($form, FormStateInterface &$form_state) {
   if ($node = $form_state->getFormObject()->getEntity()) {
@@ -135,17 +135,16 @@ function addanother_node_form_submit($form, FormStateInterface &$form_state) {
     );
     _addanother_quelch_message($node);
     $t_args = array(
-        '@type' => node_get_type_label($node),
-        '%title' => $node->label(),
-        ':node_link' => $node->url(),
+      '@type' => node_get_type_label($node),
+      '%title' => $node->label(),
+      ':node_link' => $node->url(),
     );
     drupal_set_message(t('@type <a href=":node_link">%title</a> has been created. You may now create another.', $t_args));
   }
 }
 
 /**
- * Submit handler if the normal submit button was pressed, however
- * the node has the 'message' feature enabled.
+ * Submit handler if the normal submit button was pressed.
  */
 function addanother_node_form_message_submit($form, FormStateInterface &$form_state) {
   if ($node = $form_state->getFormObject()->getEntity()) {
@@ -165,7 +164,9 @@ function addanother_node_form_message_submit($form, FormStateInterface &$form_st
  * Remove the default Drupal node creation message.
  */
 function _addanother_quelch_message($node) {
-  if (!isset($_SESSION['messages']['status'])) return FALSE;
+  if (!isset($_SESSION['messages']['status'])) {
+    return FALSE;
+  }
 
   $t_args = array(
     '@type' => node_get_type_label($node),

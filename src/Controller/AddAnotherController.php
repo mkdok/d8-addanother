@@ -11,7 +11,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\node\NodeInterface;
 
 /**
- * Controller routines for add another routes.
+ * Controller routines for Add another routes.
  */
 class AddAnotherController extends ControllerBase {
 
@@ -32,13 +32,13 @@ class AddAnotherController extends ControllerBase {
     $account = \Drupal::currentUser();
     $type = $node->getType();
 
-    if (\Drupal::routeMatch()->getRouteName() == 'entity.node.edit_form'
-      && !$config->get('tab_edit.' . $type)) {
+    if (\Drupal::routeMatch()->getRouteName() == 'entity.node.edit_form' &&
+      !$config->get('tab_edit.' . $type)) {
       return AccessResult::forbidden();
     }
 
-    if ($config->get('tab.' . $type)
-      && $account->hasPermission('use add another')) {
+    if ($config->get('tab.' . $type) &&
+      $account->hasPermission('use add another')) {
       return AccessResult::allowed();
     }
 
